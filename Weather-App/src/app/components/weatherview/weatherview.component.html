@@ -1,0 +1,18 @@
+<app-search></app-search> 
+
+<div class="loader" *ngIf="reqSent"></div>
+<div class="weather-view-container" *ngIf="weatherObj.cod == '200'">
+  <h2 class="city-name">{{ weatherObj.name }}, {{ weatherObj.sys.country }}</h2>
+  <h1 class="temperature">{{ Math.round(weatherObj.main.temp).toString() }}°</h1>
+  <div class="icon-mood-cntainer">
+    <div class="icon-container">
+      <img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/{{ weatherObj.weather[0].icon}}.png" alt="">
+    </div>
+    <span class="mood">{{ weatherObj.weather[0].main }}</span>
+  </div>
+  <h3 class="high-low-temperature">High: <strong>{{ Math.round(weatherObj.main.temp_max).toString() }}°</strong>, Low: <strong>{{ Math.round(weatherObj.main.temp_min).toString() }}°</strong></h3>
+</div>
+
+<div class="weather-view-container" *ngIf="weatherObj.cod != '200'">
+  <h2 class="err-text">{{ weatherObj.message }}</h2>
+</div>
